@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+html(lang="en")
+head
+  meta(charset="UTF-8")
+  link(href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u", crossorigin="anonymous")
+  link(href='styles.css', rel='stylesheet')
+  script(src='https://code.jquery.com/jquery-3.1.0.js', integrity='sha256-slogkvB1K3VOkzAI8QITxV3VzpOnkeNVsKvtkYLMjfk=', crossorigin='anonymous')
+  script(src="main.js")
+  title Message Board
+body
+  .container
+    .row
+      .col-xs-12.text-center
+        h1 #{title}
+        h2 Post Something!
+        form(action="/message", method="POST", role="form")
+          div.form-group
+            textarea#message.form-control(rows="6", name="text", placeholder="Type a message")
+          p
+             button.btn.btn-info.bt-xs.delete Post Message
+      
+    .row
+      .col-xs-12.text-center
+      if messages.length
+        table.table
+          thead
+              tbody
+                tr
+                  th Post
+                  th Time
+          tbody#messagelist     
+            each message in messages
+              tr(data-id= message.id)
+                td #{message.post}
+                td #{message.time}
+                td
+                  button.btn.btn-info.bt-xs.success Edit
+
+
+
+
+
+
+        //- 
+
+
+
+//- .row
+//-       .col-xs-12
+//-         form(action="/message", method="POST", role="form")
+//-           div.form-group
+//-             textarea#message.form-control(rows="6", name="text", placeholder="Type a message")
+//-           div.text-center
+//-             p
+//-               button.btn.btn-info.bt-xs.delete Post Message
+
+
+
+  
+
+
+
+
+
+
+
+ul.hidden
+  li#template
+  li.post
+  li.time
+    button.btn.btn-danger.bt-xs.delete X
