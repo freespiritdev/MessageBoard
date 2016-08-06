@@ -80,7 +80,7 @@ app.route('/messages/:id')
 //   res.send({timestamp: Date.now() }); //Date has to be wrapped in an object
 // });
 
-app.listen(PORT, err => {
+app.listen(process.env.PORT, err => {
   console.log(err || `Server listening on port ${PORT}`);
 });
 
