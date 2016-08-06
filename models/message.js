@@ -1,28 +1,31 @@
+const connection = require('../config/db');
+
 const fs = require('fs');
 const path = require('path');
 const uuid = require('node-uuid');
+const squel = require('squel').useFlavour('mysql');
 const dataFilePath = path.join(__dirname, '../data/messages.json');
 const moment = require('moment');
-
-//working in Postman
-exports.getAll = function(callback){
-  fs.readFile(dataFilePath, (err, buffer) => {
+const postDate = moment()
+connection.query(`create table if not exists messages (
+    post varchar(100),
+    post varchar(255),
+    id int
+  )`, err => {
     if(err) {
-      callback(err);
-      return;
+      console.log('table create err:', err);
     }
+  })
 
-    let messages;
+exports.getAll = function(cb) {
 
-    try{
-      messages = JSON.parse(buffer);
-    }catch(err) {
-      callback(err);
-      return;
-    }
-    callback(null, messages);
+  let sql = squel.select().from('messages').toString();
+
+  connection.query(sql, (err, messages) => {
+    cb(err, messages);
   });
 }
+
 //working in Postman
 exports.getById = (id, callback) => {
   seeMessages((err, messages) => {

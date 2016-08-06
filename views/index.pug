@@ -15,9 +15,9 @@ body
         h2 Post Something!
         form(action="/message", method="POST", role="form")
           div.form-group
-            textarea#message.form-control(rows="6", name="text", placeholder="Type a message")
+            textarea#message.form-control(rows="6", name="text")
           p
-             button.btn.btn-info.bt-xs.delete Post Message
+             button.btn.btn-primary.add Post Message
       
     .row
       .col-xs-12.text-center
@@ -31,34 +31,10 @@ body
           tbody#messagelist     
             each message in messages
               tr(data-id= message.id)
-                td #{message.post}
-                td #{message.time}
+                td= message.posts
+                td= message.posted_at
                 td
-                  button.btn.btn-info.bt-xs.success Edit
-
-
-
-
-
-
-        //- 
-
-
-
-//- .row
-//-       .col-xs-12
-//-         form(action="/message", method="POST", role="form")
-//-           div.form-group
-//-             textarea#message.form-control(rows="6", name="text", placeholder="Type a message")
-//-           div.text-center
-//-             p
-//-               button.btn.btn-info.bt-xs.delete Post Message
-
-
-
-  
-
-
+                  button.btn.btn-primary.edit Edit
 
 
 
@@ -66,6 +42,6 @@ body
 
 ul.hidden
   li#template
-  li.post
-  li.time
+  li.posts
+  li.posted_at
     button.btn.btn-danger.bt-xs.delete X

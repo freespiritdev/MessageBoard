@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 const PORT = process.env.PORT || 3000;
 
 const express = require('express');
@@ -74,9 +76,9 @@ app.route('/messages/:id')
   });
 
 
-app.get('/timestamp', (req, res) => {
-  res.send({timestamp: Date.now() }); //Date has to be wrapped in an object
-});
+// app.get('/timestamp', (req, res) => {
+//   res.send({timestamp: Date.now() }); //Date has to be wrapped in an object
+// });
 
 app.listen(PORT, err => {
   console.log(err || `Server listening on port ${PORT}`);

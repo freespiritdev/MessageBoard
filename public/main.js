@@ -4,6 +4,7 @@ console.log("Hey!");
 
 $(() => {
   $('table').on('click', '.delete', deleteMessage);
+  $('.add').click(add);
 
 });
 
