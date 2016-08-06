@@ -13,11 +13,11 @@ body
       .col-xs-12.text-center
         h1 #{title}
         h2 Post Something!
-        form(action="/message", method="POST", role="form")
+        form(action="/messages", method="POST", role="form")
           div.form-group
             textarea#message.form-control(rows="6", name="text")
           p
-             button.btn.btn-primary.add Post Message
+             button#add.btn.btn-primary Post Message
       
     .row
       .col-xs-12.text-center
@@ -35,6 +35,7 @@ body
                 td= message.posted_at
                 td
                   button.btn.btn-primary.edit Edit
+                  button#delete.btn.btn-danger Delete
 
 
 

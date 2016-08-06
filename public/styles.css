@@ -3,9 +3,14 @@ body {
 }
 
 form{
-  
 }
 
 textarea{
  text-align: center;
  }
+
+.btn-danger{
+background-color: #fff;
+color: red;
+}
+

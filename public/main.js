@@ -3,13 +3,14 @@
 console.log("Hey!");
 
 $(() => {
-  $('table').on('click', '.delete', deleteMessage);
-  $('.add').click(add);
+  $('#delete').on('click', '.delete', deleteMessage);
+  $('#add').(add);
 
 });
 
 
 function getMessages() {
+
   $.get('/messages')
   .done(data => {
     let $messages = data.map(lis);

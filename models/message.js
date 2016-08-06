@@ -6,9 +6,10 @@ const uuid = require('node-uuid');
 const squel = require('squel').useFlavour('mysql');
 const dataFilePath = path.join(__dirname, '../data/messages.json');
 const moment = require('moment');
-const postDate = moment()
+const postDate = moment();
+
 connection.query(`create table if not exists messages (
-    post varchar(100),
+    name varchar(100),
     post varchar(255),
     id int
   )`, err => {
@@ -17,12 +18,12 @@ connection.query(`create table if not exists messages (
     }
   })
 
-exports.getAll = function(cb) {
+exports.getAll = function(callback) {
+  // let time = moment().format("YYYY-MM-DD HH:mm");
+  // let sql = squel.select().from('messages').toString();
 
-  let sql = squel.select().from('messages').toString();
-
-  connection.query(sql, (err, messages) => {
-    cb(err, messages);
+  connection.query('select * from messages', (err, messages) => {
+    callback(err, messages);
   });
 }
 
@@ -37,16 +38,21 @@ exports.getById = (id, callback) => {
 //create is working in Postman
 exports.create = function(messageObj, callback) {
   exports.getAll(function(err, messages) {
-    messageObj.timestamp = moment();
+    messageObj.posted_at = moment();
 
     if(err) return callback(err);
-    
+    messageObj.time = moment().format("YYYY-MM-DD HH:mm");
     messageObj.id = uuid.v4()// Unique ID
 
     messages.push(messageObj); //update
 
-    fs.writeFile(dataFilePath, JSON.stringify(messages), function(err) {
-      callback(err);
+    connection.query(`insert into messages 
+      (posts,name,time,id)
+      VALUES
+      ("${messageObj.posts}","${messageObj.posted_at}")`, 
+      (err, messages) => {
+      console.log(err || messages)
+      callbackb(err, message)
     });
   });
 }
